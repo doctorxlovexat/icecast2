@@ -4,9 +4,11 @@ services:
   icecast:
     image: moul/icecast:latest
     volumes:
-      - logs:/var/log/icecast2
-      - /etc/localtime:/etc/localtime:ro
-      - ./icecast.xml:/etc/icecast2/icecast.xml  # Povezivanje xml fajla sa kontejnerom
+      - ./ICECAST2/etc/icecast2/icecast.xml:/etc/icecast2/icecast.xml   # Povezivanje icecast.xml
+      - ./ICECAST2/etc/icecast2/admin:/etc/icecast2/admin                 # Povezivanje admin foldera
+      - ./ICECAST2/etc/icecast2/web:/etc/icecast2/web                     # Povezivanje web foldera
+      - logs:/var/log/icecast2                                           # Log direktorijum
+      - /etc/localtime:/etc/localtime:ro                                  # Lokalno vreme
     environment:
       - ICECAST_SOURCE_PASSWORD=zizu
       - ICECAST_ADMIN_PASSWORD=zizu
