@@ -1,3 +1,4 @@
+
 FROM debian:stable-slim
 
 MAINTAINER Manfred Touron "m@42.am"
@@ -10,10 +11,12 @@ RUN apt-get -qq -y update; \
     apt-get -qq -y full-upgrade; \
     apt-get -qq -y install icecast2 python-setuptools sudo cron-apt; \
     apt-get -y autoclean; \
-    apt-get clean; \
-    chown -R icecast2 /etc/icecast2; \
-    chmod 777 /var/log/icecast2/access.log; \
-    chmod 777 /var/log/icecast2/error.log
+    apt-get clean
+
+# Kreiraj direktorijume i postavi odgovarajuća prava
+RUN mkdir -p /var/log/icecast2 && \
+    chown -R icecast2:icecast2 /var/log/icecast2 && \
+    chmod -R 777 /var/log/icecast2
 
 # Dodajemo start script
 ADD ./start.sh /start.sh
