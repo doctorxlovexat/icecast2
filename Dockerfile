@@ -5,16 +5,16 @@ MAINTAINER Manfred Touron "m@42.am"
 ENV DEBIAN_FRONTEND noninteractive
 
 # Update i instalacija potrebnih paketa
-RUN apt-get -qq -y update; \
-    apt-get -qq -y full-upgrade; \
-    apt-get -qq -y install icecast2 python-setuptools sudo cron-apt; \
-    apt-get -y autoclean; \
-    apt-get clean; \
-    mkdir -p /var/log/icecast2; \  # Kreiraj direktorijum za logove
-    chown -R icecast2 /etc/icecast2; \
-    chmod 777 /var/log/icecast2; \  # Postavi dozvole za direktorijum
-    chmod 777 /var/log/icecast2/access.log; \  # Postavi dozvole za fajl
-    chmod 777 /var/log/icecast2/error.log;    # Postavi dozvole za fajl
+RUN apt-get -qq -y update && \
+    apt-get -qq -y full-upgrade && \
+    apt-get -qq -y install icecast2 python-setuptools sudo cron-apt && \
+    apt-get -y autoclean && \
+    apt-get clean && \
+    mkdir -p /var/log/icecast2 && \
+    chown -R icecast2:icecast2 /var/log/icecast2 && \
+    chmod -R 777 /var/log/icecast2 && \
+    chmod 777 /var/log/icecast2/access.log && \
+    chmod 777 /var/log/icecast2/error.log
 
 # Kopiraj start.sh
 ADD ./start.sh /start.sh
