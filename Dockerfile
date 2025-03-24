@@ -2,21 +2,22 @@ FROM debian:stable-slim
 
 MAINTAINER Manfred Touron "m@42.am"
 
-# Postavljanje DEBIAN_FRONTEND kako bi izbegli interaktivna pitanja tokom instalacije
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Ažuriranje sistema i instalacija potrebnih paketa
+# Ažuriranje i instalacija paketa
 RUN apt-get update && \
     apt-get -y upgrade && \
     apt-get -y install icecast2 python3-setuptools sudo && \
     apt-get -y autoclean && \
-    apt-get clean && \
-    mkdir -p /var/log/icecast2 && \
-    chown -R icecast2:icecast2 /var/log/icecast2 && \
-    chmod -R 777 /var/log/icecast2 || tail -n 50 /var/log/apt/history.log
+    apt-get clean
 
 # Kreiranje korisnika i grupe icecast2
 RUN addgroup --system icecast2 && adduser --system --no-create-home --ingroup icecast2 icecast2
+
+# Kreiranje direktorijuma za logove
+RUN mkdir -p /var/log/icecast2 && \
+    chown -R icecast2:icecast2 /var/log/icecast2 && \
+    chmod -R 777 /var/log/icecast2
 
 # Kopiraj icecast.xml u /etc/icecast2
 COPY ./icecast.xml /etc/icecast2/icecast.xml
