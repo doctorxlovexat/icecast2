@@ -46,17 +46,18 @@
 
     <fileserve>1</fileserve>
 
-    <paths>
-        <logdir>./log</logdir>
-        <webroot>./web</webroot>
-        <adminroot>./admin</adminroot>
-        <alias source="/" destination="/status.xsl"/>
-    </paths>
+   <paths>
+    <logdir>/log</logdir> <!-- Promeni ovo -->
+    <webroot>./web</webroot>
+    <adminroot>./admin</adminroot>
+    <alias source="/" destination="/status.xsl"/>
+</paths>
 
-    <logging>
-        <accesslog>access.log</accesslog>
-        <errorlog>error.log</errorlog>
-        <loglevel>3</loglevel>
-        <logsize>10000</logsize>
-    </logging>
+<logging>
+    <accesslog>/log/access.log</accesslog> <!-- Promeni ovo -->
+    <errorlog>/log/error.log</errorlog> <!-- Promeni ovo -->
+    <loglevel>3</loglevel>
+    <logsize>10000</logsize>
+</logging>
+
 </icecast>
