@@ -54,8 +54,8 @@
 </paths>
 
 <logging>
-    <accesslog>/var/log/ICECAST2/log/access.log</accesslog>
-    <errorlog>/var/log/ICECAST2/log/error.log</errorlog>
+    <accesslog>/var/log/icecast2/log/access.log</accesslog>
+    <errorlog>/var/log/icecast2/log/error.log</errorlog>
     <loglevel>3</loglevel>
     <logsize>10000</logsize>
 </logging>
