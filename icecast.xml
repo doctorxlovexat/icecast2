@@ -46,18 +46,19 @@
 
     <fileserve>1</fileserve>
 
-   <paths>
-    <logdir>/log</logdir> <!-- Promeni ovo -->
+  <paths>
+    <logdir>/var/log/icecast2</logdir> <!-- Apsolutna putanja -->
     <webroot>./web</webroot>
     <adminroot>./admin</adminroot>
     <alias source="/" destination="/status.xsl"/>
 </paths>
 
 <logging>
-    <accesslog>/log/access.log</accesslog> <!-- Promeni ovo -->
-    <errorlog>/log/error.log</errorlog> <!-- Promeni ovo -->
+    <accesslog>/var/log/icecast2/log/access.log</accesslog> <!-- Apsolutna putanja -->
+    <errorlog>/var/log/icecast2/log/error.log</errorlog> <!-- Apsolutna putanja -->
     <loglevel>3</loglevel>
     <logsize>10000</logsize>
 </logging>
+
 
 </icecast>
