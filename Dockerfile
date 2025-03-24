@@ -2,22 +2,20 @@ FROM debian:stable-slim
 
 MAINTAINER Manfred Touron "m@42.am"
 
-ENV DEBIAN_FRONTEND noninteractive
+ENV DEBIAN_FRONTEND=noninteractive
 
-# Update i instalacija potrebnih paketa
-RUN apt-get -qq -y update && \
-    apt-get -qq -y full-upgrade && \
-    apt-get -qq -y install icecast2 python-setuptools sudo cron-apt && \
+# Ažuriranje i instalacija paketa
+RUN apt-get update && \
+    apt-get -y upgrade && \
+    apt-get -y install icecast2 python3-setuptools sudo && \
     apt-get -y autoclean && \
     apt-get clean && \
     mkdir -p /var/log/icecast2 && \
     chown -R icecast2:icecast2 /var/log/icecast2 && \
-    chmod -R 777 /var/log/icecast2 && \
-    chmod 777 /var/log/icecast2/access.log && \
-    chmod 777 /var/log/icecast2/error.log
+    chmod -R 777 /var/log/icecast2
 
-# Kopiraj start.sh
-ADD ./start.sh /start.sh
+# Kopiraj start.sh skriptu
+COPY start.sh /start.sh
 
 # Obezbedi dozvole za start.sh
 RUN chmod +x /start.sh
