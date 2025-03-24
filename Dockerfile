@@ -14,11 +14,6 @@ RUN apt-get update && \
 # Kreiranje korisnika i grupe icecast2
 RUN addgroup --system icecast2 && adduser --system --no-create-home --ingroup icecast2 icecast2
 
-# Kreiranje direktorijuma za logove
-RUN mkdir -p /var/log/icecast2 && \
-    chown -R icecast2:icecast2 /var/log/icecast2 && \
-    chmod -R 777 /var/log/icecast2
-
 # Kopiraj icecast.xml u /etc/icecast2
 COPY ./icecast.xml /etc/icecast2/icecast.xml
 
