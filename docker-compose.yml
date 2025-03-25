@@ -5,7 +5,7 @@ services:
     image: moul/icecast:latest
     volumes:
       - ./icecast.xml:/etc/icecast2/icecast.xml  # Povezivanje icecast.xml
-      - logs:/var/log/icecast2  # Volumen za logove
+      - logs:/var/log  # Volumen za logove
       - ./web:/usr/share/nginx/html  # Staticki fajlovi (ako ih koristiš)
       - ./admin:/var/www/icecast2/admin  # Admin panel (ako ga koristiš)
     environment:
@@ -27,7 +27,7 @@ services:
       - ICECAST_ERROR_LOG=error.log
       - ICECAST_LOGLEVEL=3
       - ICECAST_LOGSIZE=10000
-      - ICECAST_LOGDIR=/var/log/icecast2
+      - ICECAST_LOGDIR=/var/log  # Ispravljena putanja za logove
       - ICECAST_WEBROOT=/usr/share/nginx/html
       - ICECAST_ADMINROOT=/var/www/icecast2/admin
     ports:
