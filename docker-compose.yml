@@ -4,13 +4,13 @@ services:
   icecast:
     image: moul/icecast:latest
     volumes:
-      # Mapiranje icecast.xml iz korenskog direktorijuma na /etc/icecast2/icecast.xml u kontejneru
+      # Povezivanje icecast.xml iz korenskog direktorijuma
       - ./icecast.xml:/etc/icecast2/icecast.xml  
-      # Mapiranje log direktorijuma
+      # Povezivanje log direktorijuma
       - ./log:/var/log/icecast2
-      # Mapiranje admin panela
+      # Povezivanje admin panela
       - ./admin:/var/www/icecast2/admin
-      # Mapiranje web foldera
+      # Povezivanje web foldera
       - ./web:/var/www/icecast2/web
     environment:
       - ICECAST_SOURCE_PASSWORD=zizu
@@ -40,3 +40,4 @@ services:
 
 volumes:
   logs:
+
