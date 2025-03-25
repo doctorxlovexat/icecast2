@@ -17,8 +17,8 @@ RUN apt-get update && \
 # Kreiranje korisnika i grupe icecast2
 RUN addgroup --system icecast2 && adduser --system --no-create-home --ingroup icecast2 icecast2
 
-# Kopiraj icecast.xml iz korenskog direktorijuma u /etc/icecast2
-COPY ./icecast.xml /etc/icecast2/icecast.xml  
+# Kopiraj icecast.xml u /etc/icecast2
+COPY ./icecast.xml /etc/icecast2/icecast.xml
 
 # Kopiraj start.sh skriptu
 COPY start.sh /start.sh
