@@ -4,9 +4,10 @@ services:
   icecast:
     image: moul/icecast:latest
     volumes:
-      - logs:/var/log/icecast2
-      - /etc/localtime:/etc/localtime:ro
-      - ./icecast.xml:/etc/icecast2/icecast.xml  # Povezivanje icecast.xml iz projekta
+      - ./icecast.xml:/etc/icecast2/icecast.xml  # Povezivanje icecast.xml
+      - logs:/var/log/icecast2  # Volumen za logove
+      - ./web:/usr/share/nginx/html  # Staticki fajlovi (ako ih koristiš)
+      - ./admin:/var/www/icecast2/admin  # Admin panel (ako ga koristiš)
     environment:
       - ICECAST_SOURCE_PASSWORD=zizu
       - ICECAST_RELAY_PASSWORD=zizu
@@ -26,9 +27,9 @@ services:
       - ICECAST_ERROR_LOG=error.log
       - ICECAST_LOGLEVEL=3
       - ICECAST_LOGSIZE=10000
-      - ICECAST_LOGDIR=./log
-      - ICECAST_WEBROOT=./web
-      - ICECAST_ADMINROOT=./admin
+      - ICECAST_LOGDIR=/var/log/icecast2
+      - ICECAST_WEBROOT=/usr/share/nginx/html
+      - ICECAST_ADMINROOT=/var/www/icecast2/admin
     ports:
       - 8000:8000
     restart: always
