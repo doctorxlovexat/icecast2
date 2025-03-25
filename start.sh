@@ -29,10 +29,11 @@ set_val "access.log" accesslog
 set_val "error.log" errorlog
 set_val "3" loglevel
 set_val "10000" logsize
-set_val "./log" logdir
-set_val "./web" webroot
-set_val "./admin" adminroot
+set_val "/var/log" logdir  # Ispravka putanje za logove
+set_val "/usr/share/nginx/html" webroot  # Ispravka putanje za statičke fajlove
+set_val "/var/www/icecast2/admin" adminroot  # Ispravka putanje za admin panel
 
 # Pokretanje Icecast servera
 set -e
-sudo -Eu icecast2 icecast2 -n -c /etc/icecast2/icecast.xml
+# Ako pokrećeš kao root u Dockeru, možeš da ukloniš sudo
+exec icecast2 -n -c /etc/icecast2/icecast.xml
