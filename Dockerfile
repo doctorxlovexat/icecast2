@@ -10,9 +10,9 @@ RUN apt-get update && \
     apt-get -y install icecast2 python3-setuptools sudo && \
     apt-get -y autoclean && \
     apt-get clean && \
-    mkdir -p /var/log/icecast2/log && \
-    chown -R icecast2:icecast2 /var/log/icecast2 && \
-    chmod -R 777 /var/log/icecast2
+    mkdir -p /var/log && \
+    chown -R icecast2:icecast2 /var/log && \
+    chmod -R 777 /var/log
 
 # Kreiranje korisnika i grupe icecast2
 RUN addgroup --system icecast2 && adduser --system --no-create-home --ingroup icecast2 icecast2
@@ -33,4 +33,4 @@ CMD ["/start.sh"]
 EXPOSE 8000
 
 # Postavi volumen
-VOLUME ["/config", "/var/log/icecast2", "/etc/icecast2"]
+VOLUME ["/config", "/var/log", "/etc/icecast2"]
