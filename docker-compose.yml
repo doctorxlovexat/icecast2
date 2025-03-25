@@ -4,10 +4,14 @@ services:
   icecast:
     image: moul/icecast:latest
     volumes:
-      - ./icecast.xml:/etc/icecast2/icecast.xml  # Povezivanje icecast.xml
-      - logs:/var/log  # Volumen za logove
-      - ./web:/usr/share/nginx/html  # Staticki fajlovi (ako ih koristiš)
-      - ./admin:/var/www/icecast2/admin  # Admin panel (ako ga koristiš)
+      # Mapiranje icecast.xml iz korenskog direktorijuma na /etc/icecast2/icecast.xml u kontejneru
+      - ./icecast.xml:/etc/icecast2/icecast.xml  
+      # Mapiranje log direktorijuma
+      - ./log:/var/log/icecast2
+      # Mapiranje admin panela
+      - ./admin:/var/www/icecast2/admin
+      # Mapiranje web foldera
+      - ./web:/var/www/icecast2/web
     environment:
       - ICECAST_SOURCE_PASSWORD=zizu
       - ICECAST_RELAY_PASSWORD=zizu
@@ -23,12 +27,12 @@ services:
       - ICECAST_BURST_ON_CONNECT=1
       - ICECAST_BURST_SIZE=65535
       - ICECAST_PORT=8000
-      - ICECAST_ACCESS_LOG=access.log
-      - ICECAST_ERROR_LOG=error.log
+      - ICECAST_ACCESS_LOG=/var/log/icecast2/access.log
+      - ICECAST_ERROR_LOG=/var/log/icecast2/error.log
       - ICECAST_LOGLEVEL=3
       - ICECAST_LOGSIZE=10000
-      - ICECAST_LOGDIR=/var/log  # Ispravljena putanja za logove
-      - ICECAST_WEBROOT=/usr/share/nginx/html
+      - ICECAST_LOGDIR=/var/log/icecast2
+      - ICECAST_WEBROOT=/var/www/icecast2/web
       - ICECAST_ADMINROOT=/var/www/icecast2/admin
     ports:
       - 8000:8000
