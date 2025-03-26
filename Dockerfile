@@ -10,7 +10,7 @@ RUN apt-get update && \
     apt-get -y install icecast2 python3-setuptools sudo && \
     apt-get -y autoclean && \
     apt-get clean && \
-    mkdir -p /var/log/icecast2/log && \
+    mkdir -p /var/log/icecast2 && \
     chown -R icecast2:icecast2 /var/log/icecast2 && \
     chmod -R 777 /var/log/icecast2
 
@@ -18,7 +18,7 @@ RUN apt-get update && \
 RUN addgroup --system icecast2 && adduser --system --no-create-home --ingroup icecast2 icecast2
 
 # Kopiraj icecast.xml u /etc/icecast2
-COPY ./icecast.xml /etc/icecast2/icecast.xml
+COPY ./etc/icecast2/icecast.xml /etc/icecast2/icecast.xml
 
 # Kopiraj start.sh skriptu
 COPY start.sh /start.sh
@@ -33,4 +33,4 @@ CMD ["/start.sh"]
 EXPOSE 8000
 
 # Postavi volumen
-VOLUME ["/config", "/var/log/icecast2", "/etc/icecast2"]
+VOLUME ["/var/log/icecast2", "/etc/icecast2"]
