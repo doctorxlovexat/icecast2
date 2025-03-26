@@ -1,7 +1,10 @@
-FROM debian:stable-slim
+# Koristi Ubuntu sliku koja je često korišćena za Icecast
+FROM ubuntu:20.04
 
+# Postavi maintainer podatke
 MAINTAINER Manfred Touron "m@42.am"
 
+# Postavi neinteraktivni način za instalaciju
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Ažuriranje i instalacija paketa
@@ -33,4 +36,4 @@ CMD ["/start.sh"]
 EXPOSE 8000
 
 # Postavi volumen
-VOLUME ["/var/log/icecast2", "/etc/icecast2"]
+VOLUME ["/config", "/var/log/icecast2", "/etc/icecast2"]
