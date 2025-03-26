@@ -1,10 +1,13 @@
 #!/bin/sh
 
+# Provera i kreiranje direktorijuma za logove
+mkdir -p /var/log/icecast2
+
 # Postavljanje vrednosti u icecast.xml
 set_val() {
     if [ -n "$2" ]; then
         echo "set '$2' to '$1'"
-        sed -i "s|<$2>[^<]*</$2>|<$2>$1</$2>|g" /icecast.xml  # Ispravka putanje za icecast.xml
+        sed -i "s|<$2>[^<]*</$2>|<$2>$1</$2>|g" /etc/icecast2/icecast.xml
     else
         echo "Setting for '$1' is missing, skipping." >&2
     fi
@@ -29,11 +32,10 @@ set_val "access.log" accesslog
 set_val "error.log" errorlog
 set_val "3" loglevel
 set_val "10000" logsize
-set_val "/var/log" logdir  # Ispravka putanje za logove
+set_val "/var/log/icecast2" logdir  # Ispravka putanje za logove
 set_val "/usr/share/nginx/html" webroot  # Ispravka putanje za statičke fajlove
 set_val "/var/www/icecast2/admin" adminroot  # Ispravka putanje za admin panel
 
 # Pokretanje Icecast servera
 set -e
-# Ako pokrećeš kao root u Dockeru, možeš da ukloniš sudo
-exec icecast2 -n -c /icecast.xml  # Ispravka putanje za icecast.xml
+exec icecast2 -n -c /etc/icecast2/icecast.xml
