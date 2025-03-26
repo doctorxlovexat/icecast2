@@ -4,7 +4,7 @@ services:
   icecast:
     build: .
     volumes:
-      - ./etc/icecast2/icecast.xml:/etc/icecast2/icecast.xml  # Ispravna putanja do icecast.xml
+      - ./icecast.xml:/etc/icecast2/icecast.xml  # Ispravna putanja do icecast.xml
       - ./log:/var/log/icecast2  # Volumen za logove
     environment:
       - ICECAST_SOURCE_PASSWORD=zizu
