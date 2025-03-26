@@ -4,10 +4,8 @@ services:
   icecast:
     build: .
     volumes:
-      - ./icecast.xml:/etc/icecast2/icecast.xml  # Povezivanje icecast.xml sa korenskog direktorijuma
-      - ./log:/var/log/icecast2  # Volumen za logove, korišćenje lokalnog log direktorijuma
-      - ./etc/icecast2/admin:/var/www/icecast2/admin  # Admin folder
-      - ./etc/icecast2/web:/usr/share/nginx/html  # Web folder
+      - ./etc/icecast2/icecast.xml:/etc/icecast2/icecast.xml  # Ispravna putanja do icecast.xml
+      - ./log:/var/log/icecast2  # Volumen za logove
     environment:
       - ICECAST_SOURCE_PASSWORD=zizu
       - ICECAST_RELAY_PASSWORD=zizu
@@ -33,6 +31,3 @@ services:
     ports:
       - 8000:8000
     restart: always
-
-volumes:
-  logs:
