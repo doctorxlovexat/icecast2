@@ -18,7 +18,7 @@ RUN apt-get update && \
 RUN addgroup --system icecast2 && adduser --system --no-create-home --ingroup icecast2 icecast2
 
 # Kopiraj icecast.xml u /etc/icecast2
-COPY ./etc/icecast2/icecast.xml /etc/icecast2/icecast.xml
+COPY ./icecast.xml /etc/icecast2/icecast.xml
 
 # Kopiraj start.sh skriptu
 COPY start.sh /start.sh
