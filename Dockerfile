@@ -1,10 +1,10 @@
 FROM ubuntu:latest
 
 # Instalacija potrebnih paketa
-RUN apt-get update && apt-get install -y icecast2 && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y icecast2 sudo && rm -rf /var/lib/apt/lists/*
 
 # Kreiranje korisnika za Icecast
-RUN useradd -m icecast
+RUN useradd -m -d /home/icecast icecast
 
 # Kreiranje direktorijuma za logove
 RUN mkdir -p /var/log/icecast2/log && chown -R icecast:icecast /var/log/icecast2
