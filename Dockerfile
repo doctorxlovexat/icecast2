@@ -7,8 +7,10 @@ RUN apk update && apk add --no-cache \
     bash \
     curl \
     libxml2 \
-    libxslt \
-    && adduser -D icecast  # Kreiraj korisnika 'icecast'
+    libxslt
+
+# Proveri da li korisnik 'icecast' postoji, ako ne postoji, kreiraj ga
+RUN id -u icecast &>/dev/null || adduser -D icecast
 
 # Kopiraj tvoj config fajl u odgovarajući direktorijum
 COPY icecast.xml /etc/icecast/
