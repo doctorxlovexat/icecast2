@@ -1,14 +1,16 @@
-# Korišćenje zvanične Icecast slike
-FROM icecast/icecast-docker:latest
+FROM ubuntu:latest
 
-# Kopiraj tvoj icecast.xml u kontejner
-COPY ./icecast.xml /etc/icecast2/icecast.xml
+# Instalacija potrebnih paketa
+RUN apt-get update && apt-get install -y icecast2 && rm -rf /var/lib/apt/lists/*
 
-# Kopiraj log direktorijum (ako želiš)
-COPY ./log /var/log/icecast2
+# Kreiranje direktorijuma za logove
+RUN mkdir -p /var/log/icecast2/log
 
-# Postavi radnu putanju (ako je potrebno)
-WORKDIR /etc/icecast2
+# Kopiranje konfiguracionog fajla
+COPY icecast.xml /etc/icecast2/icecast.xml
 
-# Pokreni Icecast
+# Eksponovanje porta
+EXPOSE 8000
+
+# Pokretanje Icecast servera
 CMD ["icecast2", "-c", "/etc/icecast2/icecast.xml"]
