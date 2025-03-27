@@ -46,19 +46,19 @@
 
     <fileserve>1</fileserve>
 
-  <paths>
-    <logdir>/var/log/icecast2</logdir> <!-- Apsolutna putanja -->
-    <webroot>./web</webroot>
-    <adminroot>./admin</adminroot>
-    <alias source="/" destination="/status.xsl"/>
-</paths>
+    <paths>
+        <!-- Ispravljene putanje za direktorijume -->
+        <logdir>./log</logdir> <!-- Relativna putanja za log fajlove u korenskom direktorijumu -->
+        <webroot>./web</webroot> <!-- Web fajlovi treba da budu u ./web direktorijumu -->
+        <adminroot>./admin</adminroot> <!-- Admin fajlovi treba da budu u ./admin direktorijumu -->
+        <alias source="/" destination="/status.xsl"/>
+    </paths>
 
-<logging>
-    <accesslog>/var/log/icecast2/log/access.log</accesslog>
-    <errorlog>/var/log/icecast2/log/error.log</errorlog>
-    <loglevel>3</loglevel>
-    <logsize>10000</logsize>
-</logging>
-
-
+    <logging>
+        <!-- Ispravljene putanje za log fajlove u log/ direktorijumu -->
+        <accesslog>./log/access.log</accesslog>
+        <errorlog>./log/error.log</errorlog>
+        <loglevel>3</loglevel>
+        <logsize>10000</logsize>
+    </logging>
 </icecast>
