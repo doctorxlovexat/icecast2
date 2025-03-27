@@ -2,13 +2,13 @@
 FROM alpine:latest
 
 # Instaliraj potrebne pakete za Icecast
-RUN apk add --no-cache \
+RUN apk update && apk add --no-cache \
     icecast \
     bash \
     curl \
     libxml2 \
     libxslt \
-    && adduser -D -g '' icecast  # Kreiraj 'icecast' korisnika
+    && adduser -D icecast  # Kreiraj korisnika 'icecast'
 
 # Kopiraj tvoj config fajl u odgovarajući direktorijum
 COPY icecast.xml /etc/icecast/
