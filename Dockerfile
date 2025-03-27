@@ -1,24 +1,24 @@
-FROM ubuntu:latest
+FROM debian:latest
 
-# Instalacija potrebnih paketa
-RUN echo "Updating apt-get and installing dependencies..." && apt-get update && apt-get install -y icecast2 sudo && rm -rf /var/lib/apt/lists/*
-RUN echo "Installation complete!"
+# Instaliraj potrebne pakete
+RUN apt-get update && apt-get install -y \
+    icecast2 \
+    && apt-get clean
 
-# Kreiranje običnog korisnika icecast
-RUN echo "Creating user icecast..." && useradd -m icecast && echo "User icecast created!"
+# Dodaj korisnika, proveri da li već postoji pre nego što ga kreiramo
+RUN id -u icecast &>/dev/null || useradd -m icecast
 
-# Kreiranje direktorijuma za logove
-RUN echo "Creating log directory..." && mkdir -p /var/log/icecast2/log && chown -R icecast:icecast /var/log/icecast2
+# Kreiraj direktorijume za logove, ako već ne postoje
+RUN mkdir -p /var/log/icecast2 /var/www/html
 
-# Kopiranje konfiguracionog fajla
-RUN echo "Copying icecast.xml..." && cp /icecast.xml /etc/icecast2/icecast.xml && echo "icecast.xml copied!"
+# Dodaj odgovarajuće permisije
+RUN chown -R icecast:icecast /var/log/icecast2 /var/www/html
 
-# Postavljanje korisnika
+# Kopiraj Icecast konfiguraciju u odgovarajući direktorijum
+COPY ./icecast.xml /etc/icecast2/icecast.xml
+
+# Postavi korisnika pod kojim će Icecast raditi
 USER icecast
-RUN echo "Switched to icecast user."
 
-# Eksponovanje porta
-EXPOSE 8000
-
-# Pokretanje Icecast servera
+# Pokreni Icecast server
 CMD ["icecast2", "-c", "/etc/icecast2/icecast.xml"]
