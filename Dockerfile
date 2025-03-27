@@ -9,15 +9,12 @@ RUN apk update && apk add --no-cache \
     libxml2 \
     libxslt
 
-# Proveri da li korisnik 'icecast' postoji, ako ne postoji, kreiraj ga
-RUN id -u icecast &>/dev/null || adduser -D icecast
+# Kreiraj direktorijume za logove i web fajlove
+RUN mkdir -p /var/log/icecast /var/www/icecast \
+    && chown -R icecast:icecast /var/log/icecast /var/www/icecast  # Postavi odgovarajuće dozvole
 
 # Kopiraj tvoj config fajl u odgovarajući direktorijum
 COPY icecast.xml /etc/icecast/
-
-# Napraviti direktorijum za logove i web root
-RUN mkdir -p /var/log/icecast /var/www/icecast \
-    && chown -R icecast:icecast /etc/icecast /var/log/icecast /var/www/icecast  # Postavi vlasništvo
 
 # Promeni korisnika na 'icecast' pre nego što pokreneš server
 USER icecast
