@@ -14,6 +14,11 @@
         <burst-size>65535</burst-size>
     </limits>
 
+    <limits>
+    <changeowner value="true"/>
+</limits>
+
+
     <authentication>
         <source-password>zizu</source-password>
         <relay-password>zizu</relay-password>
