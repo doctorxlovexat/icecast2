@@ -4,7 +4,7 @@ FROM ubuntu:20.04
 RUN apt-get update && apt-get install -y icecast2
 
 # Kopiraj konfiguraciju
-COPY ./icecast.xml /etc/icecast2/icecast.xml
+COPY ./etc/icecast2/icecast.xml /etc/icecast2/icecast.xml
 
 # Expose port
 EXPOSE 8000
