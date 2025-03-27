@@ -9,9 +9,9 @@ RUN apk update && apk add --no-cache \
     libxml2 \
     libxslt
 
-# Kreiraj direktorijume za logove i web fajlove
-RUN mkdir -p /var/log/icecast /var/www/icecast \
-    && chown -R icecast:icecast /var/log/icecast /var/www/icecast  # Postavi odgovarajuće dozvole
+# Kreiraj direktorijume za logove, admin i web fajlove
+RUN mkdir -p /var/log/icecast /var/www/icecast /var/icecast/admin \
+    && chown -R icecast:icecast /var/log/icecast /var/www/icecast /var/icecast/admin
 
 # Kopiraj tvoj config fajl u odgovarajući direktorijum
 COPY icecast.xml /etc/icecast/
