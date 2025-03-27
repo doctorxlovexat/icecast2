@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: icecast-server
+    env: docker
+    plan: free
+    repo: https://github.com/doctorxlovexat/icecast2
+    envVars:
+      - key: PORT
+        value: "8000"
