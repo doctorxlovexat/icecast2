@@ -3,8 +3,8 @@ FROM ubuntu:latest
 # Instalacija potrebnih paketa
 RUN apt-get update && apt-get install -y icecast2 sudo && rm -rf /var/lib/apt/lists/*
 
-# Provera da li korisnik postoji, ako ne, kreiraj ga
-RUN id -u icecast &>/dev/null || useradd -m -d /home/icecast icecast
+# Kreiranje običnog korisnika icecast
+RUN useradd -m icecast
 
 # Kreiranje direktorijuma za logove
 RUN mkdir -p /var/log/icecast2/log && chown -R icecast:icecast /var/log/icecast2
