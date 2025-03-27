@@ -1,33 +1,12 @@
 version: '3.8'
-
 services:
   icecast:
     build: .
-    volumes:
-      - ./icecast.xml:/etc/icecast2/icecast.xml  # Icecast konfiguracija
-      - ./log:/var/log/icecast2  # Volumen za logove
-    environment:
-      - ICECAST_SOURCE_PASSWORD=zizu
-      - ICECAST_RELAY_PASSWORD=zizu
-      - ICECAST_ADMIN_PASSWORD=zizu
-      - ICECAST_PASSWORD=zizu
-      - ICECAST_HOSTNAME=https://icecast2-dw8i.onrender.com
-      - ICECAST_CLIENTS=100
-      - ICECAST_SOURCES=2
-      - ICECAST_QUEUE_SIZE=524288
-      - ICECAST_CLIENT_TIMEOUT=30
-      - ICECAST_HEADER_TIMEOUT=15
-      - ICECAST_SOURCE_TIMEOUT=10
-      - ICECAST_BURST_ON_CONNECT=1
-      - ICECAST_BURST_SIZE=65535
-      - ICECAST_PORT=8000
-      - ICECAST_ACCESS_LOG=access.log
-      - ICECAST_ERROR_LOG=error.log
-      - ICECAST_LOGLEVEL=3
-      - ICECAST_LOGSIZE=10000
-      - ICECAST_LOGDIR=/var/log/icecast2
-      - ICECAST_WEBROOT=/usr/share/nginx/html
-      - ICECAST_ADMINROOT=/var/www/icecast2/admin
-    ports:
-      - 8000:8000
+    container_name: icecast_server
     restart: always
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./log:/var/log/icecast2
+    environment:
+      - ICECAST_CONFIG=/etc/icecast2/icecast.xml
