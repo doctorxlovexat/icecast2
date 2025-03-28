@@ -9,7 +9,10 @@ RUN apk update && apk add --no-cache \
     libxml2 \
     libxslt
 
-# Kreiraj direktorijume za log fajlove
+
+COPY ./log /var/log/icecast2/log
+
+   # Kreiraj direktorijume za log fajlove
 RUN mkdir -p /var/log/icecast2/log \
     && touch /var/log/icecast2/log/access.log /var/log/icecast2/log/error.log \
     && chown -R icecast:icecast /var/log/icecast2/log
