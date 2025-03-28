@@ -9,16 +9,21 @@ RUN apk update && apk add --no-cache \
     libxml2 \
     libxslt
 
-# Kreiraj direktorijume za log fajlove i postavi odgovarajuće dozvole
-RUN mkdir -p /var/log/icecast2/log \
-    && touch /var/log/icecast2/log/access.log /var/log/icecast2/log/error.log \
-    && chown -R icecast:icecast /var/log/icecast2
 
 # Kopiraj tvoj config fajl u odgovarajući direktorijum
 COPY icecast.xml /etc/icecast/
 
 # Promeni korisnika na 'icecast' pre nego što pokreneš server
 USER icecast
+
+RUN chmod 644 /etc/mime.types
+RUN chown icecast:icecast /etc/mime.types
+
+# Kreiraj direktorijume za log fajlove i postavi odgovarajuće dozvole
+RUN mkdir -p /var/log/icecast2/log \
+    && touch /var/log/icecast2/log/access.log /var/log/icecast2/log/error.log \
+    && chown -R icecast:icecast /var/log/icecast2
+
 
 # Izlaganje porta koji Icecast koristi (npr. 8000)
 EXPOSE 8000
