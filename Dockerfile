@@ -1,5 +1,5 @@
-# Koristi zvaničnu Alpine sliku sa najnovijom verzijom Icecast
-FROM alpine:latest
+# Koristi stariju, proverenu verziju Alpine (na primer, Alpine 3.13)
+FROM alpine:3.13
 
 # Instaliraj potrebne pakete za Icecast
 RUN apk update && apk add --no-cache \
