@@ -1,5 +1,5 @@
-# Koristi stariju verziju Alpine slike
-FROM alpine:3.15
+# Koristi stariju, proverenu verziju Alpine (na primer, Alpine 3.13)
+FROM alpine:3.13
 
 # Instaliraj potrebne pakete za Icecast
 RUN apk update && apk add --no-cache \
@@ -13,10 +13,6 @@ RUN apk update && apk add --no-cache \
 RUN mkdir -p /var/log/icecast2/log \
     && touch /var/log/icecast2/log/access.log /var/log/icecast2/log/error.log \
     && chown -R icecast:icecast /var/log/icecast2
-
-# Kreiraj /etc direktorijum, ako ne postoji, i kopiraj mime.types fajl
-RUN mkdir -p /etc
-COPY mime.types /etc/mime.types
 
 # Kopiraj tvoj config fajl u odgovarajući direktorijum
 COPY icecast.xml /etc/icecast/
