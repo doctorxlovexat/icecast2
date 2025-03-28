@@ -22,9 +22,9 @@
         <admin-password>zizu</admin-password>
     </authentication>
 
-    <listen-socket>
-        <port>8000</port>
-    </listen-socket>
+  <listen-socket>
+    <port>10000</port>
+</listen-socket>
 
     <http-headers>
         <header name="Access-Control-Allow-Origin" value="*"/>
