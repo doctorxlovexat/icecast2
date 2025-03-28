@@ -12,7 +12,7 @@
         <source-timeout>10</source-timeout>
         <burst-on-connect>1</burst-on-connect>
         <burst-size>65535</burst-size>
-          <changeowner value="true"/>
+        <changeowner value="true"/>
     </limits>
 
     <authentication>
@@ -48,9 +48,10 @@
     <fileserve>1</fileserve>
 
     <paths>
-        <logdir>./log</logdir>
-        <webroot>./web</webroot>
-        <adminroot>./admin</adminroot>
+        <!-- Apsolutne putanje umesto relativnih -->
+        <logdir>/var/log/icecast2/log</logdir>
+        <webroot>/usr/share/icecast/web</webroot>
+        <adminroot>/usr/share/icecast/admin</adminroot>
         <alias source="/" destination="/status.xsl"/>
     </paths>
 
