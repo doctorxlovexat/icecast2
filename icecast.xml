@@ -22,13 +22,17 @@
         <admin-password>zizu</admin-password>
     </authentication>
 
-  <listen-socket>
+<listen-socket>
     <port>10000</port>
+    <bind-address>0.0.0.0</bind-address>
 </listen-socket>
 
-    <http-headers>
-        <header name="Access-Control-Allow-Origin" value="*"/>
-    </http-headers>
+
+<!--
+  <http-headers>
+      <header name="Access-Control-Allow-Origin" value="*"/>
+  </http-headers>
+-->
 
     <mount>
         <mount-name>/x1</mount-name>
