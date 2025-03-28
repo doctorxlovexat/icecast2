@@ -14,9 +14,7 @@ COPY ./log /var/log/icecast2/log
 
    # Kreiraj direktorijume za log fajlove
 RUN mkdir -p /var/log/icecast2/log \
-    && touch /var/log/icecast2/log/access.log /var/log/icecast2/log/error.log \
     && chown -R icecast:icecast /var/log/icecast2/log
-
 
 # Kopiraj mime.types fajl u /etc/ direktorijum
 COPY mime.types /etc/mime.types
