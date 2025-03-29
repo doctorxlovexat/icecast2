@@ -7,9 +7,9 @@
     <clients>30</clients>
     <sources>1</sources>
     <queue-size>524288</queue-size>
-    <client-timeout>60</client-timeout>
-    <header-timeout>30</header-timeout>
-    <source-timeout>30</source-timeout>
+    <client-timeout>120</client-timeout>
+    <header-timeout>60</header-timeout>
+    <source-timeout>60</source-timeout>
     <burst-on-connect>10</burst-on-connect>
 <burst-size>128000</burst-size>
     <changeowner value="true"/>
@@ -24,7 +24,7 @@
     </authentication>
 
 <listen-socket>
-    <port>8080</port> <!-- promenjen port -->
+    <port>10000</port> <!-- promenjen port -->
     <bind-address>0.0.0.0</bind-address>
 </listen-socket>
 
