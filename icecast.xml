@@ -1,39 +1,34 @@
 <icecast>
     <location>Nemačka</location>
     <admin>angeldobric@gmail.com</admin>
-    <hostname>https://icecast2-8r1b.onrender.com</hostname>
+    <hostname>icecast2-8r1b.onrender.com</hostname>
 
-  <limits>
-    <clients>30</clients>
-    <sources>1</sources>
-    <queue-size>524288</queue-size>
-    <client-timeout>60</client-timeout>
-    <header-timeout>30</header-timeout>
-    <source-timeout>30</source-timeout>
-    <burst-on-connect>10</burst-on-connect>
-<burst-size>128000</burst-size>
-    <changeowner value="true"/>
-</limits>
-
+    <limits>
+        <clients>100</clients>
+        <sources>5</sources>
+        <queue-size>524288</queue-size>
+        <client-timeout>120</client-timeout>
+        <header-timeout>60</header-timeout>
+        <source-timeout>120</source-timeout>
+        <burst-on-connect>1</burst-on-connect>
+        <burst-size>65536</burst-size>
+    </limits>
 
     <authentication>
         <source-password>zizu</source-password>
         <relay-password>zizu</relay-password>
-        <admin-user>gladijator</admin-user> <!-- Ispravljeno ime admin korisnika -->
+        <admin-user>gladijator</admin-user>
         <admin-password>zizu</admin-password>
     </authentication>
 
-<listen-socket>
-    <port>8080</port> <!-- promenjen port -->
-    <bind-address>0.0.0.0</bind-address>
-</listen-socket>
+    <listen-socket>
+        <port>10000</port> <!-- Render dozvoljava portove iznad 10000 -->
+        <bind-address>0.0.0.0</bind-address>
+    </listen-socket>
 
-
-
-
-<http-headers>
-    <header name="Access-Control-Allow-Origin" value="*"/>
-</http-headers>
+    <http-headers>
+        <header name="Access-Control-Allow-Origin" value="*"/>
+    </http-headers>
 
     <mount>
         <mount-name>/x1</mount-name>
@@ -53,17 +48,15 @@
     <fileserve>1</fileserve>
 
     <paths>
-        <!-- Apsolutne putanje umesto relativnih -->
-        <logdir>/var/log/icecast2/log</logdir>
+        <logdir>/dev/null</logdir> <!-- Isključuje logove na disku, koristi Render logs -->
         <webroot>/usr/share/icecast/web</webroot>
         <adminroot>/usr/share/icecast/admin</adminroot>
         <alias source="/" destination="/status.xsl"/>
     </paths>
 
     <logging>
-        <accesslog>access.log</accesslog>
-        <errorlog>error.log</errorlog>
+        <accesslog>/dev/stdout</accesslog> <!-- Logovi idu u Render logs -->
+        <errorlog>/dev/stderr</errorlog>
         <loglevel>4</loglevel>
-        <logsize>10000</logsize>
     </logging>
 </icecast>
