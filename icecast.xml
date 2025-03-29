@@ -3,17 +3,18 @@
     <admin>angeldobric@gmail.com</admin>
     <hostname>https://icecast2-8r1b.onrender.com</hostname>
 
-    <limits>
-        <clients>100</clients>
-        <sources>2</sources>
-        <queue-size>524288</queue-size>
-        <client-timeout>30</client-timeout>
-        <header-timeout>15</header-timeout>
-        <source-timeout>10</source-timeout>
-        <burst-on-connect>1</burst-on-connect>
-        <burst-size>65535</burst-size>
-        <changeowner value="true"/>
-    </limits>
+  <limits>
+    <clients>30</clients>
+    <sources>1</sources>
+    <queue-size>524288</queue-size>
+    <client-timeout>60</client-timeout>
+    <header-timeout>30</header-timeout>
+    <source-timeout>30</source-timeout>
+    <burst-on-connect>1</burst-on-connect>
+    <burst-size>65535</burst-size>
+    <changeowner value="true"/>
+</limits>
+
 
     <authentication>
         <source-password>zizu</source-password>
