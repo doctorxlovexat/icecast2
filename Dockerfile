@@ -45,9 +45,7 @@ LABEL name="docker-icecast" \
       org.label-schema.vcs-url="https://github.com/jee-r/docker-icecast" \
       org.opencontainers.image.source="https://github.com/jee-r/docker-icecast"
 
-# Ne koristi rootfs, samo kopiraj icecast.xml
-COPY icecast.xml /config/icecast.xml
-
+# Instalacija paketa i korisnika icecast
 RUN apk update && \
     apk upgrade && \
     apk add --upgrade --no-cache --virtual=base \
@@ -62,12 +60,22 @@ RUN apk update && \
         mailcap \
         tzdata && \
     chmod -R 777 /config && \
-    rm -rf /tmp/* 
+    rm -rf /tmp/*
+
+# Kreiraj korisnika i promeni vlasništvo
+RUN adduser -D icecast && \
+    chown -R icecast:icecast /config /var/log /usr/local
 
 COPY --from=builder /build/output /
 
-# Izmenjen port na 8080
+# Kopiraj icecast.xml u odgovarajući direktorijum
+COPY icecast.xml /config/icecast.xml
+
+# Expose port 8080
 EXPOSE 8080
+
+# Prebaci se na icecast korisnika
+USER icecast
 
 WORKDIR /config
 
