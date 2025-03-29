@@ -1,35 +1,80 @@
-# Koristi stariju verziju Alpine slike
-FROM alpine:3.15
+FROM alpine:3.21 as builder
 
-# Instaliraj potrebne pakete (koristi bash i druge dependencije)
-RUN apk update && apk add --no-cache \
-    icecast=2.4.4-r1 \  # Specifikuj stariju verziju Icecast-a
-    sh \
-    curl \
-    libxml2 \
-    libxslt
+ARG ICECAST_VERSION="2.4.4" \
+    SHA256="49b5979f9f614140b6a38046154203ee28218d8fc549888596a683ad604e4d44"
 
-# Kopiraj log direktorijum (ako je potrebno)
-COPY ./log /var/log/icecast2/log
+RUN apk update && \
+    apk upgrade && \
+    apk add --upgrade --no-cache --virtual=build-dependencies \
+        build-base \
+        coreutils \
+        curl-dev \
+        libxslt-dev \
+        libxml2-dev \
+        libogg-dev \
+        libvorbis-dev \
+        libtheora-dev \
+        speex-dev \
+        openssl-dev
 
-# Kreiraj direktorijume za log fajlove (ako nisu već kreirani)
-RUN mkdir -p /var/log/icecast2/log \
-    && chown -R icecast:icecast /var/log/icecast2/log
+WORKDIR /build
 
-# Kopiraj mime.types fajl u /etc/ direktorijum
-COPY mime.types /etc/mime.types
+RUN wget https://downloads.xiph.org/releases/icecast/icecast-$ICECAST_VERSION.tar.gz -O /build/icecast-$ICECAST_VERSION.tar.gz && \
+    echo "$SHA256 /build/icecast-$ICECAST_VERSION.tar.gz" | sha256sum -c - && \
+    tar -xvf icecast-$ICECAST_VERSION.tar.gz -C .
 
-# Postavi dozvole za mime.types fajl
-RUN chmod 644 /etc/mime.types
+WORKDIR /build/icecast-$ICECAST_VERSION
 
-# Kopiraj icecast.xml u /etc/icecast/
-COPY icecast.xml /etc/icecast/
+RUN ./configure \
+        --prefix=/usr \
+        --localstatedir=/var \
+        --sysconfdir=/etc \
+        --mandir=/usr/share/man \
+        --infodir=/usr/share/info \
+        --with-curl
 
-# Promeni korisnika na 'icecast' pre nego što pokreneš server
-USER icecast
+RUN make check
+RUN make install DESTDIR=/build/output
 
-# Izlaganje portova koji Icecast koristi (koristi port 8080)
+FROM alpine:3.21
+
+LABEL name="docker-icecast" \
+      maintainer="Jee jee@jeer.fr" \
+      description="Icecast is free server software for streaming multimedia." \
+      url="https://icecast.org" \
+      org.label-schema.vcs-url="https://github.com/jee-r/docker-icecast" \
+      org.opencontainers.image.source="https://github.com/jee-r/docker-icecast"
+
+COPY rootfs /
+
+RUN apk update && \
+    apk upgrade && \
+    apk add --upgrade --no-cache --virtual=base \
+        curl \
+        libxslt \
+        libxml2 \
+        libogg \
+        libvorbis \
+        libtheora \
+        speex \
+        openssl \
+        mailcap \
+        tzdata && \
+    chmod -R 777 /config && \
+    rm -rf /tmp/* 
+
+COPY --from=builder /build/output /
+
+# Izmenjen port na 8080
 EXPOSE 8080
 
-# Komanda koja pokreće Icecast, koristi PORT iz Render varijable
-CMD ["icecast", "-c", "/etc/icecast/icecast.xml", "-p", "$PORT"]
+WORKDIR /config
+
+# Healthcheck i signalizacija
+HEALTHCHECK --interval=1m --timeout=10s --start-period=30s --retries=5 \
+    CMD curl --fail --silent --show-error --output /dev/null --write-out "%{http_code}"  http://127.0.0.1:8080/status-json.xsl || exit 1
+
+STOPSIGNAL SIGQUIT
+
+# Pokreće Icecast sa konfiguracijom
+ENTRYPOINT ["icecast", "-c", "/config/icecast.xml"]
