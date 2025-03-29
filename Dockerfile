@@ -3,7 +3,7 @@ FROM alpine:3.15
 
 # Instaliraj potrebne pakete
 RUN apk update && apk add --no-cache \
-    icecast \
+    icecast=2.4.4-r1 \  # Specifikuj stariju verziju Icecast-a
     bash \
     curl \
     libxml2 \
@@ -29,8 +29,7 @@ COPY icecast.xml /etc/icecast/
 USER icecast
 
 # Izlaganje portova koji Icecast koristi (koristi port 8080)
-EXPOSE $PORT
-
+EXPOSE 8080
 
 # Komanda koja pokreće Icecast, koristi PORT iz Render varijable
 CMD ["icecast", "-c", "/etc/icecast/icecast.xml", "-p", "$PORT"]
