@@ -2,8 +2,9 @@
 FROM debian:bullseye-slim
 
 # Instaliraj potrebne pakete
-RUN apt-get update && apt-get install -y \
-    icecast2 \
+RUN apt-get clean && apt-get update && apt-get upgrade -y && \
+    apt-get install -y \
+    icecast \
     curl \
     libxml2 \
     libxslt \
@@ -33,4 +34,4 @@ USER icecast
 EXPOSE 8080
 
 # Komanda koja pokreće Icecast
-CMD ["icecast2", "-c", "/etc/icecast/icecast.xml"]
+CMD ["icecast", "-c", "/etc/icecast/icecast.xml"]
