@@ -29,7 +29,8 @@ COPY icecast.xml /etc/icecast/
 USER icecast
 
 # Izlaganje portova koji Icecast koristi (koristi port 8080)
-EXPOSE 8080
+EXPOSE $PORT
+
 
 # Komanda koja pokreće Icecast, koristi PORT iz Render varijable
-CMD ["icecast", "-c", "/etc/icecast/icecast.xml", "-p", "8080"]
+CMD ["icecast", "-c", "/etc/icecast/icecast.xml", "-p", "$PORT"]
