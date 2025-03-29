@@ -6,4 +6,4 @@ services:
     repo: https://github.com/doctorxlovexat/icecast2
     envVars:
       - key: PORT
-        value: "443"
+        value: "80"
