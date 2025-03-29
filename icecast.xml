@@ -20,12 +20,12 @@
     <authentication>
         <source-password>zizu</source-password>
         <relay-password>zizu</relay-password>
-        <admin-user>gladijator</admin-user> <!-- Ispravljeno ime admin korisnika -->
+        <admin-user>gladijator</admin-user> 
         <admin-password>zizu</admin-password>
     </authentication>
 
 <listen-socket>
-    <port>80</port> <!-- promenjen port -->
+    <port>80</port> 
     <bind-address>0.0.0.0</bind-address>
 </listen-socket>
 
@@ -54,7 +54,7 @@
     <fileserve>1</fileserve>
 
     <paths>
-        <!-- Apsolutne putanje umesto relativnih -->
+        
         <logdir>/var/log/icecast2/log</logdir>
         <webroot>/usr/share/icecast/web</webroot>
         <adminroot>/usr/share/icecast/admin</adminroot>
