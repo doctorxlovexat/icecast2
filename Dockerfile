@@ -1,13 +1,14 @@
-# Koristi stariju verziju Alpine slike
-FROM alpine:3.15
+# Koristi Debian sliku
+FROM debian:bullseye-slim
 
 # Instaliraj potrebne pakete
-RUN apk update && apk add --no-cache \
-    icecast \
-    bash \
+RUN apt-get update && apt-get install -y \
+    icecast2 \
     curl \
     libxml2 \
-    libxslt
+    libxslt \
+    bash \
+    && rm -rf /var/lib/apt/lists/*
 
 # Kopiraj log direktorijum (ako je potrebno)
 COPY ./log /var/log/icecast2/log
@@ -29,8 +30,7 @@ COPY icecast.xml /etc/icecast/
 USER icecast
 
 # Izlaganje portova koji Icecast koristi (koristi port 8080)
-EXPOSE $PORT
+EXPOSE 8080
 
-
-# Komanda koja pokreće Icecast, koristi PORT iz Render varijable
-CMD ["icecast", "-c", "/etc/icecast/icecast.xml", "-p", "$PORT"]
+# Komanda koja pokreće Icecast
+CMD ["icecast2", "-c", "/etc/icecast/icecast.xml"]
