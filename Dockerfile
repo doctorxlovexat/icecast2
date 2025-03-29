@@ -28,8 +28,8 @@ COPY icecast.xml /etc/icecast/
 # Promeni korisnika na 'icecast' pre nego što pokreneš server
 USER icecast
 
-# Izlaganje portova koji Icecast koristi (koristi varijablu za port)
-EXPOSE 80
+# Izlaganje portova koji Icecast koristi (koristi port 8080)
+EXPOSE 8080
 
 # Komanda koja pokreće Icecast, koristi PORT iz Render varijable
-CMD ["icecast", "-c", "/etc/icecast/icecast.xml", "-p", "$PORT"]
+CMD ["icecast", "-c", "/etc/icecast/icecast.xml", "-p", "8080"]
