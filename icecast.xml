@@ -1,7 +1,7 @@
 <icecast>
     <location>Nemačka</location>
     <admin>angeldobric@gmail.com</admin>
-    <hostname>https://icecast2-8r1b.onrender.com</hostname>
+    <hostname>icecast2-8r1b.onrender.com</hostname>
 
  <limits>
     <clients>30</clients>
@@ -25,7 +25,7 @@
     </authentication>
 
 <listen-socket>
-    <port>443</port> <!-- promenjen port -->
+    <port>80</port> <!-- promenjen port -->
     <bind-address>0.0.0.0</bind-address>
 </listen-socket>
 
