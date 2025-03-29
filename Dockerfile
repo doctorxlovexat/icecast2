@@ -29,7 +29,7 @@ COPY icecast.xml /etc/icecast/
 USER icecast
 
 # Izlaganje portova koji Icecast koristi (koristi varijablu za port)
-EXPOSE 10000
+EXPOSE 80
 
 # Komanda koja pokreće Icecast, koristi PORT iz Render varijable
 CMD ["icecast", "-c", "/etc/icecast/icecast.xml", "-p", "$PORT"]
