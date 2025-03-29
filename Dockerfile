@@ -45,7 +45,8 @@ LABEL name="docker-icecast" \
       org.label-schema.vcs-url="https://github.com/jee-r/docker-icecast" \
       org.opencontainers.image.source="https://github.com/jee-r/docker-icecast"
 
-COPY rootfs /
+# Ne koristi rootfs, samo kopiraj icecast.xml
+COPY icecast.xml /config/icecast.xml
 
 RUN apk update && \
     apk upgrade && \
