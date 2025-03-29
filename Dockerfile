@@ -4,7 +4,7 @@ FROM alpine:3.15
 # Instaliraj potrebne pakete (koristi bash i druge dependencije)
 RUN apk update && apk add --no-cache \
     icecast=2.4.4-r1 \  # Specifikuj stariju verziju Icecast-a
-    bash \
+    sh \
     curl \
     libxml2 \
     libxslt
