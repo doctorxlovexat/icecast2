@@ -24,9 +24,10 @@
     </authentication>
 
 <listen-socket>
-    <port>80</port> <!-- promenjen port -->
+    <port>8080</port> <!-- promenjen port -->
     <bind-address>0.0.0.0</bind-address>
 </listen-socket>
+
 
 
 
