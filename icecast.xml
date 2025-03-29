@@ -10,8 +10,8 @@
     <client-timeout>60</client-timeout>
     <header-timeout>30</header-timeout>
     <source-timeout>30</source-timeout>
-    <burst-on-connect>1</burst-on-connect>
-    <burst-size>65535</burst-size>
+    <burst-on-connect>0</burst-on-connect>
+    <burst-size>2048</burst-size>
     <changeowner value="true"/>
 </limits>
 
