@@ -1,5 +1,5 @@
-# Koristi stariju verziju Alpine slike
-FROM alpine:3.15
+# Koristi provereniju verziju Alpine slike
+FROM alpine:3.14
 
 # Instaliraj potrebne pakete
 RUN apk update && apk add --no-cache \
@@ -30,7 +30,7 @@ USER icecast
 WORKDIR /var/log/icecast2/log
 
 # Izlaganje portova koji Icecast koristi
-EXPOSE 8080
+EXPOSE 80
 
 # Pokretanje Icecast-a
 CMD ["icecast", "-c", "/etc/icecast/icecast.xml"]
