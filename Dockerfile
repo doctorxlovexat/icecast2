@@ -9,12 +9,12 @@ RUN apk update && apk add --no-cache \
     libxml2 \
     libxslt
 
-# Kopiraj log direktorijum (ako je potrebno)
-COPY ./log /var/log/icecast2/log
-
-# Kreiraj direktorijume za log fajlove (ako nisu već kreirani)
+# Kreiraj direktorijum za logove ako ne postoji
 RUN mkdir -p /var/log/icecast2/log \
-    && chown -R icecast:icecast /var/log/icecast2/log
+    && chown -R icecast:icecast /var/log/icecast2/
+
+# Kopiraj log direktorijum (ako je potrebno)
+COPY --chown=icecast:icecast ./log /var/log/icecast2/log
 
 # Kopiraj mime.types fajl u /etc/ direktorijum
 COPY mime.types /etc/mime.types
@@ -25,12 +25,12 @@ RUN chmod 644 /etc/mime.types
 # Kopiraj icecast.xml u /etc/icecast/
 COPY icecast.xml /etc/icecast/
 
-# Promeni korisnika na 'icecast' pre nego što pokreneš server
+# Postavi korisnika i radni direktorijum
 USER icecast
+WORKDIR /var/log/icecast2/log
 
-# Izlaganje portova koji Icecast koristi (koristi port 8080)
-EXPOSE $PORT
+# Izlaganje portova koji Icecast koristi
+EXPOSE 8080
 
-
-# Komanda koja pokreće Icecast, koristi PORT iz Render varijable
-CMD ["icecast", "-c", "/etc/icecast/icecast.xml", "-p", "$PORT"]
+# Pokretanje Icecast-a
+CMD ["icecast", "-c", "/etc/icecast/icecast.xml"]
