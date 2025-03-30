@@ -25,7 +25,7 @@
     </authentication>
 
 <listen-socket>
-    <port>80</port> 
+    <port>4000</port> 
     <bind-address>0.0.0.0</bind-address>
 </listen-socket>
 
