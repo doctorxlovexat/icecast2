@@ -8,7 +8,7 @@
     <sources>1</sources>
     <queue-size>524288</queue-size>
     <client-timeout>120</client-timeout>
-    <header-timeout>30</header-timeout>
+    <header-timeout>60</header-timeout>
     <source-timeout>120</source-timeout>
     <burst-on-connect>1</burst-on-connect>
     <burst-size>128000</burst-size>
