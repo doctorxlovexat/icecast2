@@ -4,8 +4,8 @@
     <hostname>icecast2-8r1b.onrender.com</hostname>
 
  <limits>
-    <clients>30</clients>
-    <sources>1</sources>
+    <clients>10000</clients>
+    <sources>50</sources>
     <queue-size>5524288</queue-size>
     <client-timeout>300</client-timeout>
     <header-timeout>300</header-timeout>
