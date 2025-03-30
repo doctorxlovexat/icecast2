@@ -1,7 +1,7 @@
 <icecast>
     <location>Nemačka</location>
     <admin>angeldobric@gmail.com</admin>
-    <hostname>https://icecast2-1.onrender.com</hostname>
+    <hostname>icecast2-8r1b.onrender.com</hostname>
 
  <limits>
     <clients>30</clients>
