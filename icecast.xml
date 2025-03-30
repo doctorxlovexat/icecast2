@@ -6,7 +6,7 @@
  <limits>
     <clients>30</clients>
     <sources>1</sources>
-    <queue-size>524288</queue-size>
+    <queue-size>5524288</queue-size>
     <client-timeout>300</client-timeout>
     <header-timeout>300</header-timeout>
     <source-timeout>300</source-timeout>
@@ -25,7 +25,7 @@
     </authentication>
 
 <listen-socket>
-    <port>5000</port> 
+    <port>80</port> 
     <bind-address>0.0.0.0</bind-address>
 </listen-socket>
 
