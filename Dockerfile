@@ -12,7 +12,7 @@ RUN apk update && apk add --no-cache \
 
 # Kreiraj direktorijum za logove ako ne postoji
 RUN mkdir -p /var/log/icecast2/log \
-    && chown -R icecast:icecast /var/log/icecast2/
+    && chown -R icecast:icecast /var/log/icecast2/log
 
 # Kopiraj icecast.xml u /etc/icecast/
 COPY icecast.xml /etc/icecast/
