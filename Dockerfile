@@ -1,5 +1,5 @@
-# Koristi provereniju verziju Alpine slike
-FROM alpine:3.14
+# Koristi stabilniju verziju Alpine slike
+FROM alpine:3.12
 
 # Instaliraj potrebne pakete
 RUN apk update && apk add --no-cache \
