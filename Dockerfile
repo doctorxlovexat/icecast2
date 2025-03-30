@@ -28,7 +28,7 @@ USER icecast
 WORKDIR /var/log/icecast2/log
 
 # Izlaganje portova koji Icecast koristi
-EXPOSE 4000
+EXPOSE 5000
 
 # Pokretanje Icecast-a
 CMD ["icecast", "-c", "/etc/icecast/icecast.xml"]
