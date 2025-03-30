@@ -12,7 +12,7 @@ RUN apk update && apk add --no-cache \
 
 # Kreiraj direktorijum za logove ako ne postoji
 RUN mkdir -p /var/log/icecast2/log \
-    && chown -R icecast:icecast /var/log/icecast2/log
+    && chown icecast:icecast /var/log/icecast2/log  # Postavljamo dozvole za Icecast korisnika
 
 # Kopiraj icecast.xml u /etc/icecast/
 COPY icecast.xml /etc/icecast/
@@ -28,7 +28,7 @@ USER icecast
 WORKDIR /var/log/icecast2/log
 
 # Izlaganje portova koji Icecast koristi
-EXPOSE 80
+EXPOSE 4000
 
 # Pokretanje Icecast-a
 CMD ["icecast", "-c", "/etc/icecast/icecast.xml"]
