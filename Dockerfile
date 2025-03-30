@@ -7,14 +7,15 @@ RUN apk update && apk add --no-cache \
     bash \
     curl \
     libxml2 \
-    libxslt
+    libxslt \
+    && rm -rf /var/cache/apk/*  # Čisti cache nakon instalacije
 
 # Kreiraj direktorijum za logove ako ne postoji
 RUN mkdir -p /var/log/icecast2/log \
     && chown -R icecast:icecast /var/log/icecast2/
 
 # Kopiraj log direktorijum (ako je potrebno)
-COPY --chown=icecast:icecast ./log /var/log/icecast2/log
+COPY ./logs /var/log/icecast2/log  # Povezuje lokalne logove sa kontejnerom
 
 # Kopiraj mime.types fajl u /etc/ direktorijum
 COPY mime.types /etc/mime.types
@@ -31,6 +32,9 @@ WORKDIR /var/log/icecast2/log
 
 # Izlaganje portova koji Icecast koristi
 EXPOSE 80
+
+# Postavi promenljive okruženja za eventualno logovanje
+ENV ICECAST_LOGGING=true
 
 # Pokretanje Icecast-a
 CMD ["icecast", "-c", "/etc/icecast/icecast.xml"]
