@@ -2,23 +2,24 @@
 FROM debian:bullseye
 
 # Instaliraj potrebne pakete
-RUN apt-get update && apt-get install -y \
+
+# Kopiraj konfiguracione fajlove pre instalacije
+COPY icecast.xml /etc/icecast2/icecast.xml
+COPY mime.types /etc/mime.types
+
+# Instalacija paketa
+RUN apt-get update && apt-get upgrade -y && apt-get install -y --no-install-recommends \
     icecast2 \
     bash \
     curl \
     libxml2 \
     libxslt1.1 \
-    && rm -rf /var/lib/apt/lists/*  # Čisti cache nakon instalacije
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
+
 
 # Kreiraj direktorijum za logove ako ne postoji
 RUN mkdir -p /var/log/icecast2/log \
     && chown icecast2:icecast /var/log/icecast2/log  # Postavljamo dozvole za Icecast korisnika
-
-# Kopiraj icecast.xml u /etc/icecast/
-COPY icecast.xml /etc/icecast2/icecast.xml
-
-# Kopiraj mime.types fajl u /etc/ direktorijum
-COPY mime.types /etc/mime.types
 
 # Postavi dozvole za mime.types fajl
 RUN chmod 644 /etc/mime.types
