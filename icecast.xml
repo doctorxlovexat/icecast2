@@ -3,19 +3,17 @@
     <admin>angeldobric@gmail.com</admin>
     <hostname>icecast2-8r1b.onrender.com</hostname>
 
- <limits>
-    <clients>10000</clients>
-    <sources>50</sources>
-    <queue-size>5524288</queue-size>
-    <client-timeout>300</client-timeout>
-    <header-timeout>300</header-timeout>
-    <source-timeout>300</source-timeout>
-    <burst-on-connect>1</burst-on-connect>
-    <burst-size>128000</burst-size>
-    <changeowner value="true"/>
-</limits>
-
-
+    <limits>
+        <clients>10000</clients>
+        <sources>50</sources>
+        <queue-size>5524288</queue-size>
+        <client-timeout>300</client-timeout>
+        <header-timeout>300</header-timeout>
+        <source-timeout>300</source-timeout>
+        <burst-on-connect>1</burst-on-connect>
+        <burst-size>128000</burst-size>
+        <changeowner value="true"/>
+    </limits>
 
     <authentication>
         <source-password>zizu</source-password>
@@ -24,17 +22,14 @@
         <admin-password>zizu</admin-password>
     </authentication>
 
-<listen-socket>
-    <port>80</port> 
-    <bind-address>0.0.0.0</bind-address>
-</listen-socket>
+    <listen-socket>
+        <port>8080</port> 
+        <bind-address>0.0.0.0</bind-address>
+    </listen-socket>
 
-
-
-
-<http-headers>
-    <header name="Access-Control-Allow-Origin" value="*"/>
-</http-headers>
+    <http-headers>
+        <header name="Access-Control-Allow-Origin" value="*"/>
+    </http-headers>
 
     <mount>
         <mount-name>/x1</mount-name>
@@ -54,7 +49,6 @@
     <fileserve>1</fileserve>
 
     <paths>
-        
         <logdir>/var/log/icecast2/log</logdir>
         <webroot>/usr/share/icecast/web</webroot>
         <adminroot>/usr/share/icecast/admin</adminroot>
