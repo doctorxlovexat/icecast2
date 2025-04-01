@@ -9,9 +9,9 @@ RUN apk update && apk add --no-cache \
     libxml2 \
     libxslt
 
-RUN mkdir -p /var/log/icecast2/log && \
-    chmod -R 777 /var/log/icecast2
-
+# Kreiraj log direktorijume u korenskom direktorijumu (ako je potrebno)
+RUN mkdir -p /access.log /error.log && \
+    chmod -R 777 /access.log /error.log
 
 # Kopiraj mime.types fajl u /etc/ direktorijum
 COPY mime.types /etc/mime.types
