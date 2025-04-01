@@ -10,10 +10,6 @@ RUN apk update && apk add --no-cache \
     libxslt
 
 
-# Kreiraj direktorijume za log fajlove
-RUN mkdir -p /var/log/icecast2/log \
-    && chown -R icecast:icecast /var/log/icecast2/log
-
 # Kopiraj mime.types fajl u /etc/ direktorijum
 COPY mime.types /etc/mime.types
 
@@ -27,7 +23,7 @@ COPY icecast.xml /etc/icecast/
 USER icecast
 
 # Izlaganje porta koji Icecast koristi
-EXPOSE 8080
+EXPOSE 8000
 
 # Komanda koja pokreće Icecast
 CMD ["icecast", "-c", "/etc/icecast/icecast.xml"]
