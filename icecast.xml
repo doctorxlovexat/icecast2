@@ -54,11 +54,5 @@
         <alias source="/" destination="/status.xsl"/>
     </paths>
 
-    <logging>
-        <logdir>/</logdir>
-        <accesslog>access.log</accesslog>
-        <errorlog>error.log</errorlog>
-        <loglevel>4</loglevel>
-        <logsize>10000</logsize>
-    </logging>
+    
 </icecast>
