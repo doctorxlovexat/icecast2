@@ -1,5 +1,5 @@
-# Koristi stabilniju verziju Alpine slike
-FROM alpine:3.12
+# Koristi stariju verziju Alpine slike
+FROM alpine:3.15
 
 # Instaliraj potrebne pakete
 RUN apk update && apk add --no-cache \
@@ -9,12 +9,10 @@ RUN apk update && apk add --no-cache \
     libxml2 \
     libxslt
 
-# Kreiraj direktorijum za logove ako ne postoji
-RUN mkdir -p /var/log/icecast2/log \
-    && chown -R icecast:icecast /var/log/icecast2/
 
-# Kopiraj log direktorijum (ako je potrebno)
-COPY --chown=icecast:icecast ./log /var/log/icecast2/log
+# Kreiraj direktorijume za log fajlove
+RUN mkdir -p /var/log/icecast2/log \
+    && chown -R icecast:icecast /var/log/icecast2/log
 
 # Kopiraj mime.types fajl u /etc/ direktorijum
 COPY mime.types /etc/mime.types
@@ -25,12 +23,11 @@ RUN chmod 644 /etc/mime.types
 # Kopiraj icecast.xml u /etc/icecast/
 COPY icecast.xml /etc/icecast/
 
-# Postavi korisnika i radni direktorijum
+# Promeni korisnika na 'icecast' pre nego što pokreneš server
 USER icecast
-WORKDIR /var/log/icecast2/log
 
-# Izlaganje portova koji Icecast koristi
-EXPOSE 80
+# Izlaganje porta koji Icecast koristi
+EXPOSE 8000
 
-# Pokretanje Icecast-a
+# Komanda koja pokreće Icecast
 CMD ["icecast", "-c", "/etc/icecast/icecast.xml"]
