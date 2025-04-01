@@ -24,7 +24,7 @@ RUN chmod 644 /etc/mime.types
 COPY icecast.xml /etc/icecast/
 
 # Promeni korisnika na 'icecast' pre nego što pokreneš server
-USER icecast2
+USER icecast
 
 # Izlaganje porta koji Icecast koristi
 EXPOSE 8080
