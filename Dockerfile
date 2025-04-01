@@ -27,7 +27,7 @@ COPY icecast.xml /etc/icecast/
 USER icecast
 
 # Izlaganje porta koji Icecast koristi
-EXPOSE 8000
+EXPOSE 8080
 
 # Komanda koja pokreće Icecast
 CMD ["icecast", "-c", "/etc/icecast/icecast.xml"]
