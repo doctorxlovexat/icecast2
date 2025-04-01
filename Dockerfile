@@ -9,9 +9,10 @@ RUN apk update && apk add --no-cache \
     libxml2 \
     libxslt
 
-# Kreiraj log direktorijume u korenskom direktorijumu
-RUN mkdir -p /logs && \
-    chmod -R 777 /logs
+
+# Kreiraj direktorijume za log fajlove
+RUN mkdir -p /var/log/icecast2/log \
+    && chown -R icecast:icecast /var/log/icecast2/log
 
 # Kopiraj mime.types fajl u /etc/ direktorijum
 COPY mime.types /etc/mime.types
@@ -22,7 +23,7 @@ RUN chmod 644 /etc/mime.types
 # Kopiraj icecast.xml u /etc/icecast/
 COPY icecast.xml /etc/icecast/
 
-# Promeni korisnika na 'icecast' pre nego što pokrećeš server
+# Promeni korisnika na 'icecast' pre nego što pokreneš server
 USER icecast
 
 # Izlaganje porta koji Icecast koristi
