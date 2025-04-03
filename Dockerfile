@@ -10,10 +10,6 @@ RUN apt-get update && apt-get install -y \
     libxslt1.1 \
     && rm -rf /var/lib/apt/lists/*  # Čisti cache nakon instalacije
 
-# Kreiraj direktorijum za logove ako ne postoji
-RUN mkdir -p /var/log/icecast2/log \
-    && chown icecast2:icecast /var/log/icecast2/log  # Postavljamo dozvole za Icecast korisnika
-
 # Kopiraj icecast.xml u /etc/icecast/
 COPY icecast.xml /etc/icecast2/icecast.xml
 
@@ -23,9 +19,8 @@ COPY mime.types /etc/mime.types
 # Postavi dozvole za mime.types fajl
 RUN chmod 644 /etc/mime.types
 
-# Postavi korisnika i radni direktorijum
+# Postavi korisnika
 USER icecast2
-WORKDIR /var/log/icecast2/log
 
 # Izlaganje portova koje Icecast koristi
 EXPOSE 8080
