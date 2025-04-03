@@ -1,33 +1,34 @@
-# Koristi zvaničnu Alpine sliku sa najnovijom verzijom Icecast
-FROM alpine:latest
+# Koristi stabilniju verziju Debian slike
+FROM debian:bullseye
 
-# Instaliraj potrebne pakete za Icecast
-RUN apk add --no-cache \
-    icecast \
+# Instaliraj potrebne pakete
+RUN apt-get update && apt-get install -y \
+    icecast2 \
     bash \
     curl \
     libxml2 \
-    libxslt \
-    shadow
+    libxslt1.1 \
+    && rm -rf /var/lib/apt/lists/*  # Čisti cache nakon instalacije
 
+# Kreiraj direktorijum za logove ako ne postoji
+RUN mkdir -p /var/log/icecast2/log \
+    && chown icecast2:icecast /var/log/icecast2/log  # Postavljamo dozvole za Icecast korisnika
 
-# Kopiraj tvoj config fajl u odgovarajući direktorijum
-COPY icecast.xml /etc/icecast/
-
-# Napraviti direktorijum za logove i web root
-RUN mkdir -p /var/log/icecast /var/www/icecast
-
-RUN adduser -S icecast
-RUN chown -R icecast:icecast /etc/icecast /var/log/icecast
-USER icecast
-
+# Kopiraj icecast.xml u /etc/icecast/
+COPY icecast.xml /etc/icecast2/icecast.xml
 
 # Kopiraj mime.types fajl u /etc/ direktorijum
 COPY mime.types /etc/mime.types
 
+# Postavi dozvole za mime.types fajl
+RUN chmod 644 /etc/mime.types
 
-# Izlaganje porta koji Icecast koristi (npr. 8000)
+# Postavi korisnika i radni direktorijum
+USER icecast2
+WORKDIR /var/log/icecast2/log
+
+# Izlaganje portova koje Icecast koristi
 EXPOSE 8080
 
-# Komanda koja pokreće Icecast
-CMD ["icecast", "-c", "/etc/icecast/icecast.xml"]
+# Pokretanje Icecast-a
+CMD ["icecast2", "-c", "/etc/icecast2/icecast.xml", "-p", "8080"]
