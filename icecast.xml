@@ -10,9 +10,10 @@
         <client-timeout>300</client-timeout>
         <header-timeout>300</header-timeout>
         <source-timeout>300</source-timeout>
-        <burst-on-connect>1</burst-on-connect>
-        <burst-size>128000</burst-size>
         <changeowner value="true"/>
+        <burst-on-connect>1</burst-on-connect>
+<burst-size>65536</burst-size>
+
     </limits>
 
     <authentication>
@@ -60,4 +61,10 @@
         <errorlog>error.log</errorlog>
         <loglevel>3</loglevel>
     </logging>
+
+    <changeowner>
+    <user>icecast</user>
+    <group>icecast</group>
+</changeowner>
+
 </icecast>
