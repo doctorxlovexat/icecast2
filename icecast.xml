@@ -1,31 +1,28 @@
 <icecast>
     <location>Nemačka</location>
     <admin>angeldobric@gmail.com</admin>
-    <hostname>icecast2-8r1b.onrender.com</hostname>
+    <hostname>127.0.0.1</hostname>
 
     <limits>
-        <clients>10000</clients>
-        <sources>50</sources>
-        <queue-size>5524288</queue-size>
-        <client-timeout>300</client-timeout>
-        <header-timeout>300</header-timeout>
-        <source-timeout>300</source-timeout>
-        <changeowner value="true"/>
+        <clients>100</clients>
+        <sources>2</sources>
+        <queue-size>524288</queue-size>
+        <client-timeout>30</client-timeout>
+        <header-timeout>15</header-timeout>
+        <source-timeout>10</source-timeout>
         <burst-on-connect>1</burst-on-connect>
-<burst-size>65536</burst-size>
-
+        <burst-size>65535</burst-size>
     </limits>
 
     <authentication>
         <source-password>zizu</source-password>
         <relay-password>zizu</relay-password>
-        <admin-user>gladijator</admin-user> 
+        <admin-user>gladijator</admin-user> <!-- Ispravljeno ime admin korisnika -->
         <admin-password>zizu</admin-password>
     </authentication>
 
     <listen-socket>
-        <port>8080</port> 
-        <bind-address>0.0.0.0</bind-address>
+        <port>8080</port>
     </listen-socket>
 
     <http-headers>
@@ -50,21 +47,16 @@
     <fileserve>1</fileserve>
 
     <paths>
-        <webroot>/usr/share/icecast/web</webroot>
-        <adminroot>/usr/share/icecast/admin</adminroot>
-        <alias source="/" destination="/status.xsl"/>
         <logdir>./log</logdir>
+        <webroot>./web</webroot>
+        <adminroot>./admin</adminroot>
+        <alias source="/" destination="/status.xsl"/>
     </paths>
 
     <logging>
         <accesslog>access.log</accesslog>
         <errorlog>error.log</errorlog>
         <loglevel>3</loglevel>
+        <logsize>10000</logsize>
     </logging>
-
-    <changeowner>
-    <user>icecast</user>
-    <group>icecast</group>
-</changeowner>
-
 </icecast>
