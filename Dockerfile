@@ -15,6 +15,11 @@ COPY icecast.xml /etc/icecast/
 # Napraviti direktorijum za logove i web root
 RUN mkdir -p /var/log/icecast /var/www/icecast
 
+RUN adduser -D icecast
+RUN chown -R icecast:icecast /etc/icecast /var/log/icecast
+USER icecast
+
+
 # Kopiraj mime.types fajl u /etc/ direktorijum
 COPY mime.types /etc/mime.types
 
