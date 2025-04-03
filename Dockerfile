@@ -27,5 +27,9 @@ WORKDIR /etc/icecast
 # Izlaganje porta koji Icecast koristi
 EXPOSE 8080
 
+RUN adduser -D -H icecast && chown -R icecast:icecast /etc/icecast /var/log/icecast
+USER icecast
+
+
 # Komanda koja pokreće Icecast
 CMD ["icecast", "-c", "/etc/icecast/icecast.xml"]
