@@ -1,15 +1,17 @@
-# Koristi zvaničnu Icecast sliku
-FROM icecast/icecast:2.4.4
+# Preuzmi sliku iz zajednice (npr. oznu/icecast)
+FROM oznu/icecast:latest
 
-# Kopiraj svoj icecast.xml i mime.types
-COPY icecast.xml /etc/icecast2/icecast.xml
+# Kopiraj icecast.xml
+COPY icecast.xml /etc/icecast/icecast.xml
+
+# Kopiraj mime.types
 COPY mime.types /etc/mime.types
 
-# Postavi dozvole za mime.types fajl
+# Postavi dozvole
 RUN chmod 644 /etc/mime.types
 
-# Izloženi port
+# Izlaganje porta
 EXPOSE 8080
 
-# Pokretanje Icecast-a
-CMD ["icecast2", "-c", "/etc/icecast2/icecast.xml"]
+# Pokretanje Icecast
+CMD ["icecast", "-c", "/etc/icecast/icecast.xml"]
