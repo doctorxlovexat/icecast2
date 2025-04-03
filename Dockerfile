@@ -7,7 +7,9 @@ RUN apk add --no-cache \
     bash \
     curl \
     libxml2 \
-    libxslt
+    libxslt \
+    shadow
+
 
 # Kopiraj tvoj config fajl u odgovarajući direktorijum
 COPY icecast.xml /etc/icecast/
