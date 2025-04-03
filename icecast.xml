@@ -21,6 +21,12 @@
         <admin-password>zizu</admin-password>
     </authentication>
 
+    <changeowner>
+    <user>icecast</user>
+    <group>icecast</group>
+</changeowner>
+
+
     <listen-socket>
         <port>8080</port>
     </listen-socket>
