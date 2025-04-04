@@ -8,7 +8,7 @@ RUN apk add --no-cache \
     curl \
     libxml2 \
     libxslt \
-    mime-types
+    mime.types
 
 # Kopiraj tvoj config fajl u odgovarajući direktorijum
 COPY icecast.xml /etc/icecast/
