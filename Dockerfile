@@ -1,17 +1,22 @@
-# Preuzmi sliku iz zajednice (npr. oznu/icecast)
-FROM oznu/icecast:latest
+# Koristi zvaničnu Alpine sliku sa najnovijom verzijom Icecast
+FROM alpine:latest
 
-# Kopiraj icecast.xml
-COPY icecast.xml /etc/icecast/icecast.xml
+# Instaliraj potrebne pakete za Icecast
+RUN apk add --no-cache \
+    icecast \
+    bash \
+    curl \
+    libxml2 \
+    libxslt
 
-# Kopiraj mime.types
-COPY mime.types /etc/mime.types
+# Kopiraj tvoj config fajl u odgovarajući direktorijum
+COPY icecast.xml /etc/icecast/
 
-# Postavi dozvole
-RUN chmod 644 /etc/mime.types
+# Napraviti direktorijum za logove i web root
+RUN mkdir -p /var/log/icecast /var/www/icecast
 
-# Izlaganje porta
+# Izlaganje porta koji Icecast koristi (npr. 8000)
 EXPOSE 8080
 
-# Pokretanje Icecast
+# Komanda koja pokreće Icecast
 CMD ["icecast", "-c", "/etc/icecast/icecast.xml"]
