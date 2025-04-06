@@ -1,5 +1,5 @@
-# Koristi zvaničnu Icecast sliku
-FROM ghcr.io/azuracast/icecast:latest
+# Koristi zvaničnu Icecast sliku sa Docker Hub-a
+FROM icecast/icecast:latest
 
 # Kopiraj tvoj XML konfiguracioni fajl u kontejner
 COPY icecast.xml /etc/icecast2/icecast.xml
