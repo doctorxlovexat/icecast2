@@ -12,7 +12,6 @@
         <source-timeout>10</source-timeout>
         <burst-on-connect>1</burst-on-connect>
         <burst-size>65535</burst-size>
-         <changeowner value="true"/>
     </limits>
 
     <authentication>
@@ -22,12 +21,10 @@
         <admin-password>zizu</admin-password>
     </authentication>
 
-  <changeowner>
-    <user>icecastuser</user>
-    <group>icecastuser</group>
-</changeowner>
-
-
+    <changeowner>
+        <user>icecastuser</user>
+        <group>icecastuser</group>
+    </changeowner>
 
     <listen-socket>
         <port>8080</port>
@@ -55,18 +52,15 @@
     <fileserve>1</fileserve>
 
     <paths>
-      
-        <webroot>./web</webroot>
-        <adminroot>./admin</adminroot>
-        <alias source="/" destination="/status.xsl"/>
+        <webroot>/usr/local/icecast/web</webroot>
+        <adminroot>/usr/local/icecast/admin</adminroot>
+        <alias source="/" destination="/usr/local/icecast/web/status.xsl"/>
     </paths>
 
-<logging>
-    <accesslog>access.log</accesslog>
-    <errorlog>error.log</errorlog>
-    <loglevel>3</loglevel>
-    <logsize>10000</logsize>
-</logging>
-
-
+    <logging>
+        <accesslog>/var/log/icecast/access.log</accesslog>
+        <errorlog>/var/log/icecast/error.log</errorlog>
+        <loglevel>3</loglevel>
+        <logsize>10000</logsize>
+    </logging>
 </icecast>
