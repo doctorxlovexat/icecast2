@@ -1,20 +1,16 @@
 # Koristi zvaničnu Node.js sliku
 FROM node:latest
 
-# Postavljanje radnog direktorijuma u kontejneru
-WORKDIR /app
-
-# Kopiranje konfiguracije i potrebnih fajlova u kontejner
-COPY icecast.xml /etc/icecast/
-COPY mime.types /etc/
-
-# Instalacija potrebnih paketa za Icecast (ako je potrebno)
+# Instaliraj zavisnosti za Icecast
 RUN apt-get update && apt-get install -y \
-    icecast \
+    icecast2 \
     && rm -rf /var/lib/apt/lists/*
 
-# Postavljanje porta na 8080 u Dockerfile-u
+# Kopiraj konfiguraciju Icecast servera
+COPY icecast.xml /etc/icecast/
+
+# Postavi port na 8080
 EXPOSE 8080
 
-# Pokretanje Icecast servera na portu 8080
-CMD ["icecast", "-c", "/etc/icecast/icecast.xml"]
+# Pokreni Icecast server
+CMD ["icecast2", "-c", "/etc/icecast/icecast.xml"]
