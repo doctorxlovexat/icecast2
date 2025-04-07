@@ -1,14 +1,13 @@
-# Koristi Alpine sliku
 FROM alpine:latest
 
-# Instaliraj zavisnosti za Icecast
-RUN apk add --no-cache \
-    bash \
-    curl \
-    libxml2 \
-    libxslt \
-    wget \
-    && apk add --no-cache icecast
+RUN addgroup -S icecast && \
+    adduser -S icecast
+    
+RUN apk add --update \
+        icecast \
+        mailcap && \
+    rm -rf /var/cache/apk/*
+
 
 # Kopiraj tvoj config fajl u odgovarajući direktorijum
 COPY icecast.xml /etc/icecast/
