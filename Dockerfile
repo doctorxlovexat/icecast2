@@ -17,6 +17,10 @@ COPY log /usr/local/icecast/logs
 RUN chown icecastuser:icecastuser /etc/icecast/icecast.xml && \
     chown -R icecastuser:icecastuser /usr/local/icecast/logs
 
+    # Kopiraj status.xsl iz foldera admin u direktorijum gde Icecast očekuje fajl
+COPY admin/status.xsl /usr/local/icecast/web/status.xsl
+
+
 # Izloži port
 EXPOSE 8080
 
