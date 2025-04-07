@@ -9,8 +9,12 @@ RUN apt-get update && apt-get install -y \
 # Kopiraj konfiguraciju Icecast servera
 COPY icecast.xml /etc/icecast/
 
+RUN adduser --disabled-password --gecos '' icecastuser && \
+    chown icecastuser:icecastuser /etc/icecast/icecast.xml
+
+
 # Postavi port na 8080
 EXPOSE 8080
 
-# Pokreni Icecast server
+USER icecastuser
 CMD ["icecast2", "-c", "/etc/icecast/icecast.xml"]
