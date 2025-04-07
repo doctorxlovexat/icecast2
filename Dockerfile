@@ -12,6 +12,10 @@ COPY icecast.xml /etc/icecast/
 RUN adduser --disabled-password --gecos '' icecastuser && \
     chown icecastuser:icecastuser /etc/icecast/icecast.xml
 
+    COPY log /usr/local/icecast/logs
+RUN chown -R icecastuser:icecastuser /usr/local/icecast/logs
+
+
 
 # Postavi port na 8080
 EXPOSE 8080
