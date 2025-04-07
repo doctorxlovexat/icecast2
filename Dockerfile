@@ -3,10 +3,11 @@ FROM alpine:latest
 RUN addgroup -S icecast && \
     adduser -S icecast
     
-RUN apk add --update \
+RUN apk add --no-cache \
         icecast \
         mailcap && \
     rm -rf /var/cache/apk/*
+
 
 
 # Kopiraj tvoj config fajl u odgovarajući direktorijum
