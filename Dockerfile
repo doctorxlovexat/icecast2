@@ -1,8 +1,5 @@
 FROM alpine:latest
 
-RUN addgroup -S icecast && \
-    adduser -S icecast
-    
 RUN apk add --no-cache \
         icecast \
         mailcap && \
