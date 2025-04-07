@@ -57,10 +57,10 @@
         <alias source="/" destination="/usr/local/icecast/web/status.xsl"/>
     </paths>
 
-    <logging>
-        <accesslog>/var/log/icecast/access.log</accesslog>
-        <errorlog>/var/log/icecast/error.log</errorlog>
-        <loglevel>3</loglevel>
-        <logsize>10000</logsize>
-    </logging>
+  <logging>
+    <accesslog>access.log</accesslog>
+    <errorlog>error.log</errorlog>
+    <loglevel>3</loglevel>
+    <logsize>10000</logsize>
+</logging>
 </icecast>
